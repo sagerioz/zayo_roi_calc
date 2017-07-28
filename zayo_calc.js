@@ -1,8 +1,9 @@
 var app = angular.module('roiApp', []);
 
-app.controller('Revenue', function ($scope) {
-  
-})
+app.controller('RevenueCtrl', function ($scope) {
+
+});
+
 app.controller('ExpenseCtrl', function ($scope) {
   $scope.expenses = [
     // {
@@ -33,6 +34,30 @@ app.controller('ExpenseCtrl', function ($scope) {
 
     angular.forEach($scope.expenses, function(expense) {
       return count += expense.done ? 0 : 1;
+    });
+
+    return count;
+  };
+
+  $scope.oneTimeTotalExpenses = function() {
+    var count;
+    count = 0;
+
+    angular.forEach($scope.expenses, function(expense) {
+      return count += expense.oneTime;
+      console.log("one time expense total", count);
+    });
+
+    return count;
+  };
+
+  $scope.monthlyTotalExpenses = function() {
+    var count;
+    count = 0;
+
+    angular.forEach($scope.expenses, function(expense) {
+      return count += expense.monthly;
+      console.log("monthly expense total", count);
     });
 
     return count;

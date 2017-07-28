@@ -30,12 +30,41 @@
           <td class="done-{{expense.done}}">{{expense.text}}</td>
           <td class="done-{{expense.done}}">{{expense.oneTime}}</td>
           <td class="done-{{expense.done}}">{{expense.monthly}}</td>
-          <td>delete</td>
+          <td> <button ng-click="expenses.splice($index,1)">Delete</button>  </td>
+        </tr>
+
+        <tr>
+          <td colspan=4>
+            <!-- <div class="input-group"> -->
+            <form ng-submit="addExpense()">
+                <input type="text" ng-model="expenseText" size="30"
+                    placeholder="add item">
+                <input type="number" size="30" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="expenseOneTime" placeholder="0">
+                <input type="number" ng-model="expenseMonthly" size="30" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency"
+                    placeholder="0">
+                <input class="btn-primary" type="submit" value="add revenue item">
+            </form>
+          <!-- </div> -->
+          </td>
+
+        </tr>
+
+        <tr>
+          <td></td>
+          <td><strong>One-Time Total</strong></td>
+          <td><strong>Monthly Total</strong></td>
+          <td><strong>Grand Total</strong></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td ng-bind="oneTimeTotalExpenses()"></td>
+          <td ng-bind="monthlyTotalExpenses()"></td>
+          <td></td>
         </tr>
 
       </tbody>
     </table>
-    <form ng-submit="addExpense()">
+    <!-- <form ng-submit="addExpense()">
         <input type="text" ng-model="expenseText" size="30"
             placeholder="add item">
         <input type="text" ng-model="expenseOneTime" size="30"
@@ -43,7 +72,7 @@
         <input type="text" ng-model="expenseMonthly" size="30"
             placeholder="add monthly amount">
         <input class="btn-primary" type="submit" value="add revenue item">
-    </form>
+    </form> -->
   </div>
   </div>
 
