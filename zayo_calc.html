@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html ng-app="roiApp">
+<head>
+  <title>ROI Calculator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.js"></script>
+  <script src="zayo_calc.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>ROI Calculator</h2>
+    <div id="app-container" ng-controller="ExpenseCtrl">
+      <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>One Time</th>
+          <th>Monthly</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="expense in expenses">
+          <td class="done-{{expense.done}}">{{expense.text}}</td>
+          <td class="done-{{expense.done}}">{{expense.oneTime}}</td>
+          <td class="done-{{expense.done}}">{{expense.monthly}}</td>
+          <td>delete</td>
+        </tr>
+
+      </tbody>
+    </table>
+    <form ng-submit="addExpense()">
+        <input type="text" ng-model="expenseText" size="30"
+            placeholder="add item">
+        <input type="text" ng-model="expenseOneTime" size="30"
+            placeholder="add one time amount">
+        <input type="text" ng-model="expenseMonthly" size="30"
+            placeholder="add monthly amount">
+        <input class="btn-primary" type="submit" value="add revenue item">
+    </form>
+  </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- <h2>Todo</h2>
+    <div id="app-container" ng-controller="TodoCtrl">
+        <span>{{remaining()}} of {{todos.length}} remaining</span>
+        [ <a href="" ng-click="archive()">archive</a> ] -->
+        <!-- <ul class="unstyled">
+            <li ng-repeat="todo in todos">
+                <input type="checkbox" ng-model="todo.done">
+                <span class="done-{{todo.done}}">{{todo.text}}</span>
+                <span class="done-{{todo.done}}">{{todo.oneTime}}</span>
+                <span class="done-{{todo.done}}">{{todo.monthly}}</span>
+            </li>
+        </ul> -->
+        <!-- <table class="table table-condensed">
+          <tr ng-repeat="todo in todos">
+            <td class="done-{{todo.done}}">{{todo.text}}</td>
+            <td class="done-{{todo.done}}">{{todo.oneTime}}</td>
+            <td class="done-{{todo.done}}">{{todo.monthly}}</td>
+          </tr>
+        </table> -->
+
+        <!-- <form ng-submit="addTodo()">
+            <input type="text" ng-model="todoText" size="30"
+                placeholder="add item">
+            <input type="text" ng-model="todoOneTime" size="30"
+                placeholder="add one time amount">
+            <input type="text" ng-model="todoMonthly" size="30"
+                placeholder="add monthly amount">
+            <input class="btn-primary" type="submit" value="add">
+        </form> -->
+    <!-- </div> -->
+</body>
+</html>
