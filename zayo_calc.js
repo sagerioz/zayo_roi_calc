@@ -167,6 +167,7 @@ app.controller('ExpenseCtrl', function ($scope) {
     count = count.toFixed(2)
     return `${count}`;
   };
+
 // ---- Monthly Contribution Profit = Monthly Revenue – Monthly Expenses ---->
 
   $scope.monthlyContributionProfit = function(){
@@ -183,9 +184,9 @@ app.controller('ExpenseCtrl', function ($scope) {
     // console.log("COUNT", count);
     // return `$${count}`;
     let monthRev = $scope.monthlyTotalRevenues();
-    console.log("return from funct as rev", monthRev);
+    //console.log("return from funct as rev", monthRev);
     let monthExp = $scope.monthlyTotalExpenses();
-    console.log("return from funct as exp", monthExp);
+    //console.log("return from funct as exp", monthExp);
 
     // let rev = parseInt(monthRev);
     // let exp = parseInt(monthExp);
@@ -194,21 +195,59 @@ app.controller('ExpenseCtrl', function ($scope) {
 
 
     count = (monthRev - monthExp) || 0;
-    console.log("COUNT", count);
+    //console.log("COUNT", count);
+    count = count.toFixed(2)
+
     return `${count}`;
   }
 
-  // $scope.archive = function() {
-  //   var oldExpenses;
-  //   oldExpenses = $scope.expenses;
-  //   $scope.expenses = [];
-  //
-  //   angular.forEach(oldExpenses, function(expense) {
-  //     if (!expense.done) {
-  //       return $scope.expenses.push(expense);
-  //     }
-  //   });
-  // };
+  // ---- Total Contribution Profit = Total Revenue – Total Expenses ---->
+
+  $scope.totalContributionProfit = function(){
+    //console.log("made it to total contribution func");
+    let count;
+    count = 0;
+    let totalRev = $scope.grandTotalRevenues();
+    let totalExp = $scope.grandTotalExpenses();
+    count = totalRev - totalExp;
+    count = count.toFixed(2)
+    return `${count}`;
+
+  }
+
+  // ---- Contribution Margin = Total Contribution Profit / Total Revenue ---->
+
+  $scope.contributionMargin = function(){
+    //console.log("made it to contribution Margin func");
+    let count;
+    count = 0;
+    let totalProfit = $scope.totalContributionProfit();
+    // console.log("NaN? =>",totalProfit);
+    let totalRev = $scope.grandTotalRevenues();
+    //console.log("NaN? =>",totalRev);
+
+    count = totalProfit / totalRev;
+    count = count.toFixed(2)
+    return `${count}%`;
+
+  }
+
+  // ---- Capital ROI (Months) = (One-Time Expenses – One-Time Revenue) / Monthly Contribution Profit ---->
+
+  $scope.capitalRoi = function() {
+    console.log("made it to capital ROI func");
+    let count;
+    count = 0;
+    let exp = $scope.oneTimeTotalExpenses();
+    console.log("NaN? one time expenses =>", exp);
+    let rev = $scope.oneTimeTotalRevenues();
+    console.log("NaN? one time total revenue =>", rev);
+    let profit = $scope.monthlyContributionProfit();
+    console.log("PROFIT? =>", profit);
+    count = (exp - rev ) / profit;
+    count = count.toFixed(2);
+    return `$${count}`;
+}
 });
 
 // app.controller('RoiCtrl', function ($scope) {
