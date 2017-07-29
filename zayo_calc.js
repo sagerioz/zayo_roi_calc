@@ -36,8 +36,7 @@ app.controller('RevenueCtrl', function ($scope) {
 
     if($scope.revenues.length == 1){
       count += $scope.revenues[0].oneTime;
-      console.log("HERE", count);
-      return `$${count}`;
+      return `${count}`;
     };
 
     angular.forEach($scope.revenues, function(revenue) {
@@ -46,7 +45,7 @@ app.controller('RevenueCtrl', function ($scope) {
     });
 
 
-    return `$${count}`;
+    return `${count}`;
   };
 
   $scope.monthlyTotalRevenues = function() {
@@ -55,7 +54,7 @@ app.controller('RevenueCtrl', function ($scope) {
 
     if($scope.revenues.length == 1){
       count = $scope.revenues[0].monthly || 0;
-      return `$${count}`;
+      return `${count}`;
     };
 
     angular.forEach($scope.revenues, function(revenue) {
@@ -63,7 +62,7 @@ app.controller('RevenueCtrl', function ($scope) {
       console.log("monthly revenue total", count);
     });
 
-    return `$${count}`;
+    return `${count}`;
   };
 
   $scope.grandTotalRevenues = function() {
@@ -76,11 +75,11 @@ app.controller('RevenueCtrl', function ($scope) {
 
     if(count === 'NaN' ){
       count = 0;
-      count = count.toFixed(2);
-      return `$${count}`;
+      //count = count.toFixed(2);
+      return `${count}`;
     }else{
       count = count.toFixed(2)
-      return `$${count}`;
+      return `${count}`;
     }
   };
 
@@ -132,13 +131,13 @@ app.controller('ExpenseCtrl', function ($scope) {
 
     if($scope.expenses.length === 1){
       count += $scope.expenses[0].oneTime;
-        return `$${count}`;
+        return `${count}`;
     }
 
     angular.forEach($scope.expenses, function(expense) {
       count += expense.oneTime;
     });
-    return `$${count}`;
+    return `${count}`;
   };
 
   $scope.monthlyTotalExpenses = function() {
@@ -147,15 +146,15 @@ app.controller('ExpenseCtrl', function ($scope) {
 
     if($scope.expenses.length === 1){
       count += $scope.expenses[0].monthly;
-        return `$${count}`;
+        return `${count}`;
     }
 
     angular.forEach($scope.expenses, function(expense) {
-      return count += expense.monthly;
       console.log("monthly expense total", count);
+      return count += expense.monthly;
     });
 
-    return `$${count}`;
+    return `${count}`;
   };
 
   $scope.grandTotalExpenses = function() {
@@ -166,42 +165,68 @@ app.controller('ExpenseCtrl', function ($scope) {
         return count += ((expense.monthly + expense.oneTime) * 12);
     });
     count = count.toFixed(2)
-    return `$${count}`;
+    return `${count}`;
   };
+// ---- Monthly Contribution Profit = Monthly Revenue – Monthly Expenses ---->
 
-  // $scope.monthlyContributionProfit = function(){
-  //   var count;
-  //   count = 0;
+  $scope.monthlyContributionProfit = function(){
+    console.log("made it into the function");
+    let count;
+    count = 0;
+
+    //
+    // let monthExp = $scope.monthlyTotalExpenses();
+    // console.log("MONTH EXP?", monthExp);
+    // let monthRev = $scope.monthlyTotalRevenues();
+    // console.log("MONTH REV?", monthRev);
+    // count = ((monthRev - monthExp) || 0);
+    // console.log("COUNT", count);
+    // return `$${count}`;
+    let monthRev = $scope.monthlyTotalRevenues();
+    console.log("return from funct as rev", monthRev);
+    let monthExp = $scope.monthlyTotalExpenses();
+    console.log("return from funct as exp", monthExp);
+
+    // let rev = parseInt(monthRev);
+    // let exp = parseInt(monthExp);
+    // console.log("monthExp", exp);
+    // console.log("monthReb", );
+
+
+    count = (monthRev - monthExp) || 0;
+    console.log("COUNT", count);
+    return `${count}`;
+  }
+
+  // $scope.archive = function() {
+  //   var oldExpenses;
+  //   oldExpenses = $scope.expenses;
+  //   $scope.expenses = [];
   //
-  //   let monthRev = $scope.monthlyTotalExpenses();
-  //   let monthExp = $scope.monthlyTotalRevenues();
-  //   count = (monthRev - monthExp) || 0;
-  //   return `$${count}`;
-  // }
-
-  $scope.archive = function() {
-    var oldExpenses;
-    oldExpenses = $scope.expenses;
-    $scope.expenses = [];
-
-    angular.forEach(oldExpenses, function(expense) {
-      if (!expense.done) {
-        return $scope.expenses.push(expense);
-      }
-    });
-  };
+  //   angular.forEach(oldExpenses, function(expense) {
+  //     if (!expense.done) {
+  //       return $scope.expenses.push(expense);
+  //     }
+  //   });
+  // };
 });
 
-app.controller('RoiCtrl', function ($scope) {
-  let monthRev = 0;
-  let monthExp = 0;
-  var count;
-  count = 0;
-
-    $scope.monthlyContributionProfit = function(){
-      let monthRev = $scope.monthlyTotalExpenses();
-      let monthExp = $scope.monthlyTotalRevenues();
-      count = (monthRev - monthExp) || 0;
-      return `$${count}`;
-    }
-});
+// app.controller('RoiCtrl', function ($scope) {
+//   let monthRev = 0;
+//   let monthExp = 0;
+//   var count;
+//   count = 0;
+//
+//     $scope.monthlyContributionProfit = function(){
+      // console.log("made it here");
+      // let monthRev = $scope.monthlyTotalExpenses();
+      // let monthExp = $scope.monthlyTotalRevenues();
+      // rev = parseInt(monthRev);
+      // exp = parseInt(monthExp);
+      // console.log("monthExp", monthExp);
+      //
+      // count = (rev - exp) || 0;
+      // console.log("COUNT", count);
+      // return `$${count}`;
+//     }
+// });
