@@ -28,16 +28,15 @@ app.controller('RevenueCtrl', function ($scope) {
     return count;
   };
 
-  // ------- functions that return totals --------->
+  // ------- functions that return revenue totals --------->
 
   $scope.oneTimeTotalRevenues = function() {
     var count;
     count = 0;
 
     if($scope.revenues.length == 1){
-      count = $scope.revenues[0].oneTime;
+      count += $scope.revenues[0].oneTime;
       console.log("HERE", count);
-      count = count.toFixed(2)
       return `$${count}`;
     };
 
@@ -46,7 +45,7 @@ app.controller('RevenueCtrl', function ($scope) {
       console.log("one time revenue total", count);
     });
 
-    count = count.toFixed(2)
+
     return `$${count}`;
   };
 
@@ -55,8 +54,7 @@ app.controller('RevenueCtrl', function ($scope) {
     count = 0;
 
     if($scope.revenues.length == 1){
-      count = $scope.revenues[0].monthly;
-      count = count.toFixed(2)
+      count = $scope.revenues[0].monthly || 0 ;
       return `$${count}`;
     };
 
@@ -65,7 +63,7 @@ app.controller('RevenueCtrl', function ($scope) {
       console.log("monthly revenue total", count);
     });
 
-    return count;
+    return `$${count}`;
   };
 
   $scope.grandTotalRevenues = function() {
@@ -77,7 +75,6 @@ app.controller('RevenueCtrl', function ($scope) {
       console.log("monthly expense total", count);
     });
 
-    count = count.toFixed(2)
     return `$${count}`;
   };
 
@@ -129,15 +126,14 @@ app.controller('ExpenseCtrl', function ($scope) {
     return count;
   };
 
-// ------- functions that return totals --------->
+// ------- functions that return expense totals --------->
 
   $scope.oneTimeTotalExpenses = function() {
     var count;
     count = 0;
 
-    if(expenses.length === 1){
-      count += expenses.oneTime;
-      count = count.toFixed(2)
+    if($scope.expenses.length === 1){
+      count += $scope.expenses[0].oneTime;
         return `$${count}`;
     }
 
@@ -152,9 +148,8 @@ app.controller('ExpenseCtrl', function ($scope) {
     var count;
     count = 0;
 
-    if(expenses.length === 1){
-      count += expenses.monthly;
-      count = count.toFixed(2)
+    if($scope.expenses.length === 1){
+      count += $scope.expenses[0].monthly;
         return `$${count}`;
     }
 
@@ -163,7 +158,6 @@ app.controller('ExpenseCtrl', function ($scope) {
       console.log("monthly expense total", count);
     });
 
-    count = count.toFixed(2)
     return `$${count}`;
   };
 
@@ -176,7 +170,6 @@ app.controller('ExpenseCtrl', function ($scope) {
       console.log("monthly expense total", count);
     });
 
-    count = count.toFixed(2)
     return `$${count}`;
   };
 
