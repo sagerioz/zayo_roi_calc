@@ -34,9 +34,11 @@ app.controller('RevenueCtrl', function ($scope) {
     var count;
     count = 0;
 
-    if(revenues.length === 1){
-      count += revenues.oneTime;
-        return `$${count}`;
+    if($scope.revenues.length == 1){
+      count = $scope.revenues[0].oneTime;
+      console.log("HERE", count);
+      count = count.toFixed(2)
+      return `$${count}`;
     };
 
     angular.forEach($scope.revenues, function(revenue) {
@@ -44,16 +46,18 @@ app.controller('RevenueCtrl', function ($scope) {
       console.log("one time revenue total", count);
     });
 
-    return count;
+    count = count.toFixed(2)
+    return `$${count}`;
   };
 
   $scope.monthlyTotalRevenues = function() {
     var count;
     count = 0;
 
-    if(revenues.length === 1){
-      count += revenues.oneTime;
-        return `$${count}`;
+    if($scope.revenues.length == 1){
+      count = $scope.revenues[0].monthly;
+      count = count.toFixed(2)
+      return `$${count}`;
     };
 
     angular.forEach($scope.revenues, function(revenue) {
