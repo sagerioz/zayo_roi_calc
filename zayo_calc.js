@@ -98,15 +98,7 @@ app.controller('RevenueCtrl', function ($scope) {
 });
 
 app.controller('ExpenseCtrl', function ($scope) {
-  $scope.expenses = [
-    // {
-    //   text: "learn angular",
-    //   done: true
-    // }, {
-    //   text: "build an angular app",
-    //   done: false
-    // }
-  ];
+  $scope.expenses = [];
 
   $scope.addExpense = function() {
     $scope.expenses.push({
