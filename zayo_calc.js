@@ -2,6 +2,67 @@ var app = angular.module('roiApp', []);
 
 app.controller('RevenueCtrl', function ($scope) {
 
+  $scope.revenues = [];
+
+  $scope.addRevenue = function(){
+    $scope.revenues.push({
+      text: $scope.revenueText,
+      oneTime: $scope.revenueOneTime,
+      monthly: $scope.revenueMonthly
+    });
+
+    $scope.revenueText = "";
+    $scope.revenueOneTime = 0;
+    $scope.revenueMonthly = 0;
+    return [$scope.revenueText, $scope.revenueOneTime, $scope.revenueMonthly];
+  };
+
+  $scope.remaining = function() {
+    var count;
+    count = 0;
+
+    angular.forEach($scope.revenues, function(revenue) {
+      return count += revenue.done ? 0 : 1;
+    });
+
+    return count;
+  };
+
+  $scope.oneTimeTotalRevenues = function() {
+    var count;
+    count = 0;
+
+    angular.forEach($scope.revenues, function(revenue) {
+      return count += revenue.oneTime;
+      console.log("one time revenue total", count);
+    });
+
+    return count;
+  };
+
+  $scope.monthlyTotalRevenues = function() {
+    var count;
+    count = 0;
+
+    angular.forEach($scope.revenues, function(revenue) {
+      return count += revenue.monthly;
+      console.log("monthly revenue total", count);
+    });
+
+    return count;
+  };
+
+  $scope.archive = function() {
+    var oldRevenues;
+    oldRevenues = $scope.revenues;
+    $scope.revenues = [];
+
+    angular.forEach(oldRevenues, function(revenue) {
+      if (!revenue.done) {
+        return $scope.revenues.push(revenue);
+      }
+    });
+  };
 });
 
 app.controller('ExpenseCtrl', function ($scope) {
@@ -44,11 +105,10 @@ app.controller('ExpenseCtrl', function ($scope) {
     count = 0;
 
     angular.forEach($scope.expenses, function(expense) {
-      return count += expense.oneTime;
-      console.log("one time expense total", count);
+      count += expense.oneTime;
     });
-
-    return count;
+    count = count.toFixed(2)
+    return `$${count}`;
   };
 
   $scope.monthlyTotalExpenses = function() {
@@ -59,8 +119,9 @@ app.controller('ExpenseCtrl', function ($scope) {
       return count += expense.monthly;
       console.log("monthly expense total", count);
     });
-
-    return count;
+    
+    count = count.toFixed(2)
+    return `$${count}`;
   };
 
   $scope.archive = function() {
@@ -74,7 +135,6 @@ app.controller('ExpenseCtrl', function ($scope) {
       }
     });
   };
-//};
 });
 
 app.controller('ItemController', function ($scope) {
