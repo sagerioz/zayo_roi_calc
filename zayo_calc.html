@@ -16,7 +16,7 @@
 
   <div class="container">
     <h2>ROI Calculator</h2>
-    <div id="app-container" ng-controller="ExpenseCtrl">
+    <div id="app-container" ng-controller="RevenueCtrl">
       <table class="table table-condensed">
       <thead>
         <tr>
@@ -26,147 +26,81 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="expense in expenses">
-          <td class="done-{{expense.done}}">{{expense.text}}</td>
-          <td class="done-{{expense.done}}">{{expense.oneTime | currency:"$"}}</td>
-          <td class="done-{{expense.done}}">{{expense.monthly | currency:"$"}}</td>
-          <td> <button ng-click="expenses.splice($index,1)">Delete</button>  </td>
-        </tr>
 
-        <tr>
-          <td colspan=4>
-            <form ng-submit="addExpense()">
-                <input type="text" ng-model="expenseText" size="30"
-                    placeholder="add item">
-                <input type="number" size="30" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="expenseOneTime" placeholder="0">
-                <input type="number" ng-model="expenseMonthly" size="30" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency"
-                    placeholder="0">
-                <input class="btn-primary" type="submit" value="add expense item">
-            </form>
-          </td>
+     <tr ng-repeat="revenue in revenues">
+       <td class="done-{{revenue.done}}">{{revenue.text}}</td>
+       <td class="done-{{revenue.done}}">{{revenue.oneTime | currency:"$"}}</td>
+       <td class="done-{{revenue.done}}">{{revenue.monthly | currency:"$"}}</td>
+       <td> <button ng-click="revenues.splice($index,1)">Delete</button>  </td>
+     </tr>
 
-        </tr>
+     <tr>
+       <td colspan=4>
+         <form ng-submit="addRevenue()">
+             <input type="text" ng-model="revenueText" size="30"
+                 placeholder="add item">
+             <input type="number" size="30" value="0" min="0" step=".01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="revenueOneTime" placeholder="$0.00">
+             <input type="number" ng-model="revenueMonthly" size="30" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency"
+                 placeholder="$0.00">
+             <input class="btn-primary" type="submit" value="add revenue item">
+         </form>
+       </td>
 
-        <!-- <tr ng-repeat="revenue in revenues">
-          <td class="done-{{revenue.done}}">{{revenue.text}}</td>
-          <td class="done-{{revenue.done}}">{{revenue.oneTime}}</td>
-          <td class="done-{{revenue.done}}">{{revenue.monthly}}</td>
-          <td> <button ng-click="revenue.splice($index,1)">Delete</button>  </td>
-        </tr>
-
-        <tr>
-          <td colspan=4>
-            <form ng-submit="addRevenue()">
-                <input type="text" ng-model="revenueText" size="30"
-                    placeholder="add item">
-                <input type="number" size="30" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="revenueOneTime" placeholder="0">
-                <input type="number" ng-model="revenueMonthly" size="30" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency"
-                    placeholder="0">
-                <input class="btn-primary" type="submit" value="add revenue item">
-            </form>
-          </td>
-
-        </tr> -->
-       </tbody>
+     </tr>
+   </tbody>
        </table>
 
-       <div id="app-container" ng-controller="RevenueCtrl">
+       <div id="app-container" ng-controller="ExpenseCtrl">
          <table class="table table-condensed">
          <thead>
            <tr>
-             <th></th>
              <th>Item</th>
              <th>One Time</th>
              <th>Monthly</th>
            </tr>
          </thead>
          <tbody>
-        <tr>
-          <td>Revenues</td>
-          <td><strong>One-Time Total</strong></td>
-          <td><strong>Monthly Total</strong></td>
-          <td><strong>Grand Total</strong></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td ng-bind="oneTimeTotalExpenses()">$</td>
-          <td ng-bind="monthlyTotalExpenses()">$</td>
-          <td ng-bind="grandTotalExpenses()">$</td>
-        </tr>
+           <tr ng-repeat="expense in expenses">
+             <td class="done-{{expense.done}}">{{expense.text}}</td>
+             <td class="done-{{expense.done}}">{{expense.oneTime | currency:"$"}}</td>
+             <td class="done-{{expense.done}}">{{expense.monthly | currency:"$"}}</td>
+             <td> <button ng-click="expenses.splice($index,1)">Delete</button>  </td>
+           </tr>
 
-        <tr ng-repeat="revenue in revenues">
-          <td class="done-{{revenue.done}}">{{revenue.text}}</td>
-          <td class="done-{{revenue.done}}">{{revenue.oneTime | currency:"$"}}</td>
-          <td class="done-{{revenue.done}}">{{revenue.monthly | currency:"$"}}</td>
-          <td> <button ng-click="revenues.splice($index,1)">Delete</button>  </td>
-        </tr>
+           <tr>
+             <td colspan=4>
+               <form ng-submit="addExpense()">
+                   <input type="text" ng-model="expenseText" size="30"
+                       placeholder="add item">
+                   <input type="number" size="30" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="expenseOneTime" placeholder="$0.00">
+                   <input type="number" ng-model="expenseMonthly" size="30" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency"
+                       placeholder="$0.00">
+                   <input class="btn-primary" type="submit" value="add expense item">
+               </form>
+             </td>
 
-        <tr>
-          <td colspan=4>
-            <form ng-submit="addRevenue()">
-                <input type="text" ng-model="revenueText" size="30"
-                    placeholder="add item">
-                <input type="number" size="30" value="0" min="0" step=".01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" ng-model="revenueOneTime" placeholder="$0.00">
-                <input type="number" ng-model="revenueMonthly" size="30" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency"
-                    placeholder="$0.00">
-                <input class="btn-primary" type="submit" value="add revenue item">
-            </form>
-          </td>
+           </tr>
+           <tr>
+             <td></td>
+             <td><strong>One-Time Total</strong></td>
+             <td><strong>Monthly Total</strong></td>
+             <td><strong>Grand Total</strong></td>
+           </tr>
+           <tr>
+             <td>Revenue</td>
+             <td ng-bind="oneTimeTotalRevenues()"></td>
+             <td ng-bind="monthlyTotalRevenues()"></td>
+             <td ng-bind="grandTotalRevenues()"></td>
+           </tr>
+           <tr>
+             <td>Expenses</td>
+             <td ng-bind="oneTimeTotalExpenses()"></td>
+             <td ng-bind="monthlyTotalExpenses()"></td>
+             <td ng-bind="grandTotalExpenses()"></td>
+           </tr>
 
-        </tr>
-
-      </tbody>
+          </tbody>
     </table>
-    <!-- <form ng-submit="addExpense()">
-        <input type="text" ng-model="expenseText" size="30"
-            placeholder="add item">
-        <input type="text" ng-model="expenseOneTime" size="30"
-            placeholder="add one time amount">
-        <input type="text" ng-model="expenseMonthly" size="30"
-            placeholder="add monthly amount">
-        <input class="btn-primary" type="submit" value="add revenue item">
-    </form> -->
   </div>
-  </div>
-
-
-
-
-
-
-
-
-
-
-    <!-- <h2>Todo</h2>
-    <div id="app-container" ng-controller="TodoCtrl">
-        <span>{{remaining()}} of {{todos.length}} remaining</span>
-        [ <a href="" ng-click="archive()">archive</a> ] -->
-        <!-- <ul class="unstyled">
-            <li ng-repeat="todo in todos">
-                <input type="checkbox" ng-model="todo.done">
-                <span class="done-{{todo.done}}">{{todo.text}}</span>
-                <span class="done-{{todo.done}}">{{todo.oneTime}}</span>
-                <span class="done-{{todo.done}}">{{todo.monthly}}</span>
-            </li>
-        </ul> -->
-        <!-- <table class="table table-condensed">
-          <tr ng-repeat="todo in todos">
-            <td class="done-{{todo.done}}">{{todo.text}}</td>
-            <td class="done-{{todo.done}}">{{todo.oneTime}}</td>
-            <td class="done-{{todo.done}}">{{todo.monthly}}</td>
-          </tr>
-        </table> -->
-
-        <!-- <form ng-submit="addTodo()">
-            <input type="text" ng-model="todoText" size="30"
-                placeholder="add item">
-            <input type="text" ng-model="todoOneTime" size="30"
-                placeholder="add one time amount">
-            <input type="text" ng-model="todoMonthly" size="30"
-                placeholder="add monthly amount">
-            <input class="btn-primary" type="submit" value="add">
-        </form> -->
-    <!-- </div> -->
 </body>
 </html>

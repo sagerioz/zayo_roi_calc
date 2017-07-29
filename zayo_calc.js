@@ -28,9 +28,16 @@ app.controller('RevenueCtrl', function ($scope) {
     return count;
   };
 
+  // ------- functions that return totals --------->
+
   $scope.oneTimeTotalRevenues = function() {
     var count;
     count = 0;
+
+    if(revenues.length === 1){
+      count += revenues.oneTime;
+        return `$${count}`;
+    };
 
     angular.forEach($scope.revenues, function(revenue) {
       return count += revenue.oneTime;
@@ -44,12 +51,30 @@ app.controller('RevenueCtrl', function ($scope) {
     var count;
     count = 0;
 
+    if(revenues.length === 1){
+      count += revenues.oneTime;
+        return `$${count}`;
+    };
+
     angular.forEach($scope.revenues, function(revenue) {
       return count += revenue.monthly;
       console.log("monthly revenue total", count);
     });
 
     return count;
+  };
+
+  $scope.grandTotalRevenues = function() {
+    var count;
+    count = 0;
+
+    angular.forEach($scope.revenues, function(revenue) {
+      return count += revenue.monthly;
+      console.log("monthly expense total", count);
+    });
+
+    count = count.toFixed(2)
+    return `$${count}`;
   };
 
   $scope.archive = function() {
@@ -100,9 +125,17 @@ app.controller('ExpenseCtrl', function ($scope) {
     return count;
   };
 
+// ------- functions that return totals --------->
+
   $scope.oneTimeTotalExpenses = function() {
     var count;
     count = 0;
+
+    if(expenses.length === 1){
+      count += expenses.oneTime;
+      count = count.toFixed(2)
+        return `$${count}`;
+    }
 
     angular.forEach($scope.expenses, function(expense) {
       count += expense.oneTime;
@@ -115,11 +148,30 @@ app.controller('ExpenseCtrl', function ($scope) {
     var count;
     count = 0;
 
+    if(expenses.length === 1){
+      count += expenses.monthly;
+      count = count.toFixed(2)
+        return `$${count}`;
+    }
+
     angular.forEach($scope.expenses, function(expense) {
       return count += expense.monthly;
       console.log("monthly expense total", count);
     });
-    
+
+    count = count.toFixed(2)
+    return `$${count}`;
+  };
+
+  $scope.grandTotalExpenses = function() {
+    var count;
+    count = 0;
+
+    angular.forEach($scope.expenses, function(expense) {
+      return count += expense.monthly;
+      console.log("monthly expense total", count);
+    });
+
     count = count.toFixed(2)
     return `$${count}`;
   };
