@@ -180,8 +180,7 @@ app.controller('ExpenseCtrl', function ($scope) {
     let grandTotalRevenue = $scope.grandTotalRevenues();
     let totalRevNum = grandTotalRevenue.slice(1);
     let totalRev = parseFloat(totalRevNum);
-    count = totalProfit / totalRev;
-    console.log("NaN? =>", count);
+    count = (totalProfit / totalRev) * 100;
     if(count === 'NaN'){
       return `0%`;
     }
