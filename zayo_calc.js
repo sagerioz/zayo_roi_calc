@@ -58,7 +58,7 @@ app.controller('RevenueCtrl', function ($scope) {
     count = 0;
 
     angular.forEach($scope.revenues, function(revenue) {
-        count += ((revenue.monthly + revenue.oneTime) * 12);
+        count = (revenue.oneTime + (revenue.monthly * 12));
     });
 
     if(count === 'NaN' ){
@@ -130,7 +130,7 @@ app.controller('ExpenseCtrl', function ($scope) {
     count = 0;
 
     angular.forEach($scope.expenses, function(expense) {
-        return count += ((expense.monthly + expense.oneTime) * 12);
+        return count += (expense.oneTime + (expense.monthly * 12));
     });
     count = count.toFixed(2);
     return `$${count}`;
@@ -174,15 +174,18 @@ app.controller('ExpenseCtrl', function ($scope) {
   $scope.contributionMargin = function(){
     let count;
     count = 0;
-    let totalProfit = $scope.totalContributionProfit();
+    let totalContributionProf = $scope.totalContributionProfit();
+    let totalProfitNum = totalContributionProf.slice(1);
+    let totalProfit = parseFloat(totalProfitNum);
     let grandTotalRevenue = $scope.grandTotalRevenues();
     let totalRevNum = grandTotalRevenue.slice(1);
     let totalRev = parseFloat(totalRevNum);
     count = totalProfit / totalRev;
-    count = count.toFixed(2)
+    console.log("NaN? =>", count);
     if(count === 'NaN'){
-      count = 0
+      return `0%`;
     }
+    count = count.toFixed(0);
     return `${count}%`;
 
   }
@@ -201,7 +204,7 @@ app.controller('ExpenseCtrl', function ($scope) {
     let profitInStr = $scope.monthlyContributionProfit();
     let profit = profitInStr.slice(1);
     let profitNum = parseFloat(profit);
-    count = (exp - rev ) / profit;
+    count = (exp - rev) / profit;
     count = count.toFixed(1);
     if(count === 'NaN'){
       count = 0
