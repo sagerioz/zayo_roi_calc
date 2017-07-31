@@ -134,6 +134,7 @@ app.controller('ExpenseCtrl', function ($scope) {
     });
 
     count = count.toFixed(2);
+    //count = Number(parseFloat(count).toFixed(4)).toLocaleString('en');
     return `$${count}`;
   };
 
@@ -214,4 +215,12 @@ app.controller('ExpenseCtrl', function ($scope) {
       return `${count}`;
     }
 }
+   $scope.change = function(){
+     capitalRoi();
+     contributionMargin();
+     totalContributionProfit();
+     monthlyContributionProfit();
+     grandTotalExpenses();
+     grandTotalRevenues();
+   }
 });

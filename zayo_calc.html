@@ -33,7 +33,7 @@
        <td class="done-{{revenue.done}}">{{revenue.text}}</td>
        <td class="done-{{revenue.done}}">{{revenue.oneTime | currency:"$"}}</td>
        <td class="done-{{revenue.done}}">{{revenue.monthly | currency:"$"}}</td>
-       <td> <button ng-click="revenues.splice($index,1)">Delete</button>  </td>
+       <td> <button ng-click="revenues.splice($index,1)" ng-change="change()" ng-model="recalcFieldsRev">Delete</button>  </td>
      </tr>
 
      <tr>
@@ -73,7 +73,7 @@
              <td class="done-{{expense.done}}">{{expense.text}}</td>
              <td class="done-{{expense.done}}">{{expense.oneTime | currency:"$"}}</td>
              <td class="done-{{expense.done}}">{{expense.monthly | currency:"$"}}</td>
-             <td> <button ng-click="expenses.splice($index,1)">Delete</button>  </td>
+             <td> <button ng-click="expenses.splice($index,1)" ng-change="change()" ng-model="recalcFieldsExp">Delete</button>  </td>
            </tr>
 
            <tr>
