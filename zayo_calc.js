@@ -15,6 +15,7 @@ app.controller('RevenueCtrl', function ($scope) {
     $scope.revenueOneTime = 0;
     $scope.revenueMonthly = 0;
     return [$scope.revenueText, $scope.revenueOneTime, $scope.revenueMonthly];
+
   };
 
   // ------- functions that return revenue totals --------->
@@ -215,7 +216,7 @@ app.controller('ExpenseCtrl', function ($scope) {
       return `${count}`;
     }
 }
-   $scope.change = function(){
+   $scope.refreshCalc = function(){
      capitalRoi();
      contributionMargin();
      totalContributionProfit();
