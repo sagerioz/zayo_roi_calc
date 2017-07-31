@@ -132,6 +132,7 @@ app.controller('ExpenseCtrl', function ($scope) {
     angular.forEach($scope.expenses, function(expense) {
         return count += (expense.oneTime + (expense.monthly * 12));
     });
+
     count = count.toFixed(2);
     return `$${count}`;
   };
@@ -154,6 +155,7 @@ app.controller('ExpenseCtrl', function ($scope) {
 
   // ---- Total Contribution Profit = Total Revenue – Total Expenses ---->
 
+
   $scope.totalContributionProfit = function(){
     let count;
     count = 0;
@@ -174,19 +176,20 @@ app.controller('ExpenseCtrl', function ($scope) {
   $scope.contributionMargin = function(){
     let count;
     count = 0;
-    let totalContributionProf = $scope.totalContributionProfit();
-    let totalProfitNum = totalContributionProf.slice(1);
-    let totalProfit = parseFloat(totalProfitNum);
-    let grandTotalRevenue = $scope.grandTotalRevenues();
-    let totalRevNum = grandTotalRevenue.slice(1);
-    let totalRev = parseFloat(totalRevNum);
-    count = (totalProfit / totalRev) * 100;
-    if(count === 'NaN'){
-      return `0%`;
-    }
-    count = count.toFixed(0);
-    return `${count}%`;
 
+      let totalContributionProf = $scope.totalContributionProfit();
+      let totalProfitNum = totalContributionProf.slice(1);
+      let totalProfit = parseFloat(totalProfitNum);
+      let grandTotalRevenue = $scope.grandTotalRevenues();
+      let totalRevNum = grandTotalRevenue.slice(1);
+      let totalRev = parseFloat(totalRevNum);
+      if(totalRev === 0 && totalProfit === 0){
+        return '0%'
+      }else{
+        count = (totalProfit / totalRev) * 100;
+        count = count.toFixed(0);
+        return `${count}%`;
+      }
   }
 
   // ---- Capital ROI (Months) = (One-Time Expenses – One-Time Revenue) / Monthly Contribution Profit ---->
@@ -196,18 +199,19 @@ app.controller('ExpenseCtrl', function ($scope) {
     count = 0;
     let oneTimeTotalExpense = $scope.oneTimeTotalExpenses();
     let expNum = oneTimeTotalExpense.slice(1);
-    let exp = parseFloat(expNum);
+    let expenses = parseFloat(expNum);
     let oneTimeTotalRevenue = $scope.oneTimeTotalRevenues();
     let revNum = oneTimeTotalRevenue.slice(1);
-    let rev = parseFloat(revNum);
+    let revenue = parseFloat(revNum);
     let profitInStr = $scope.monthlyContributionProfit();
     let profit = profitInStr.slice(1);
     let profitNum = parseFloat(profit);
-    count = (exp - rev) / profit;
-    count = count.toFixed(1);
-    if(count === 'NaN'){
-      count = 0
+    if(profitNum === 0){
+      return 0;
+    }else{
+      count = (expenses - revenue) / profitNum;
+      count = count.toFixed(1);
+      return `${count}`;
     }
-    return `${count}`;
 }
 });
