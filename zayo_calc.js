@@ -59,7 +59,8 @@ app.controller('RevenueCtrl', function ($scope) {
     count = 0;
 
     angular.forEach($scope.revenues, function(revenue) {
-        count = (revenue.oneTime + (revenue.monthly * 12));
+        count += (revenue.oneTime + (revenue.monthly * 12));
+        console.log(count);
     });
 
     if(count === 'NaN' ){
@@ -119,7 +120,6 @@ app.controller('ExpenseCtrl', function ($scope) {
     }
 
     angular.forEach($scope.expenses, function(expense) {
-      console.log("monthly expense total", count);
       return count += expense.monthly;
     });
     count = count.toFixed(2);
@@ -135,25 +135,24 @@ app.controller('ExpenseCtrl', function ($scope) {
     });
 
     count = count.toFixed(2);
-    //count = Number(parseFloat(count).toFixed(4)).toLocaleString('en');
     return `$${count}`;
   };
 
 // ---- Monthly Contribution Profit = Monthly Revenue – Monthly Expenses ---->
 
-  $scope.monthlyContributionProfit = function(){
-    let count;
-    count = 0;
-    let monthlyTotalRevenue = $scope.monthlyTotalRevenues();
-    let monthRevNum = monthlyTotalRevenue.slice(1);
-    let monthRev = parseFloat(monthRevNum);
-    let monthlyExpenses = $scope.monthlyTotalExpenses();
-    let monthExpNum = monthlyExpenses.slice(1);
-    let monthExp = parseFloat(monthExpNum)
-    count = (monthRev - monthExp) || 0;
-    count = count.toFixed(2)
-    return `$${count}`;
-  }
+$scope.monthlyContributionProfit = function(){
+  let count;
+  count = 0;
+  let monthlyTotalRevenue = $scope.monthlyTotalRevenues();
+  let monthRevNum = monthlyTotalRevenue.slice(1);
+  let monthRev = parseFloat(monthRevNum);
+  let monthlyExpenses = $scope.monthlyTotalExpenses();
+  let monthExpNum = monthlyExpenses.slice(1);
+  let monthExp = parseFloat(monthExpNum)
+  count = (monthRev - monthExp) || 0;
+  count = count.toFixed(2)
+  return `$${count}`;
+}
 
   // ---- Total Contribution Profit = Total Revenue – Total Expenses ---->
 
@@ -172,6 +171,7 @@ app.controller('ExpenseCtrl', function ($scope) {
     return `$${count}`;
 
   }
+
 
   // ---- Contribution Margin = Total Contribution Profit / Total Revenue ---->
 
