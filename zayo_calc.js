@@ -5,16 +5,17 @@ app.controller('RevenueCtrl', function ($scope) {
   $scope.revenues = [];
 
   $scope.addRevenue = function(){
-    $scope.revenues.push({
-      text: $scope.revenueText,
-      oneTime: $scope.revenueOneTime,
-      monthly: $scope.revenueMonthly
-    });
 
-    $scope.revenueText = "";
-    $scope.revenueOneTime = 0;
-    $scope.revenueMonthly = 0;
-    return [$scope.revenueText, $scope.revenueOneTime, $scope.revenueMonthly];
+      $scope.revenues.push({
+        text: $scope.revenueText,
+        oneTime: $scope.revenueOneTime,
+        monthly: $scope.revenueMonthly
+      });
+
+      $scope.revenueText = "";
+      $scope.revenueOneTime = 0;
+      $scope.revenueMonthly = 0;
+      return [$scope.revenueText, $scope.revenueOneTime, $scope.revenueMonthly];
 
   };
 
@@ -83,7 +84,7 @@ app.controller('ExpenseCtrl', function ($scope) {
       oneTime: $scope.expenseOneTime,
       monthly: $scope.expenseMonthly
     });
-
+    console.log($scope.expenses);
     $scope.expenseText = "";
     $scope.expenseOneTime = 0;
     $scope.expenseMonthly = 0;
